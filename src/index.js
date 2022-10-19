@@ -4,7 +4,6 @@ import './index.css'
 
 function Example() {
   const [images, setImages] = useState([]);
-  const [error, setError] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
 
   function loadImages() {
@@ -19,10 +18,6 @@ function Example() {
           setLoaded(true);
           setImages(gallery);
         },
-        (error) => {
-          setLoaded(true);
-          setError(error);
-        }
       )
   }
 
@@ -30,11 +25,8 @@ function Example() {
     loadImages();
   }, []);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-  else if (!isLoaded) {
-    return <div>Loading...</div>;
+  if (!isLoaded) {
+    return <div>Loading, please wait.</div>;
   }
   else {
     return (
